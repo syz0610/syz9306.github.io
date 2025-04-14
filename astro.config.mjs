@@ -21,8 +21,8 @@ import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://fuwari.vercel.app/",
-  base: "/",
+  site: "https://syz0610.github.io",
+  base: "",//syz: 博客根目录,会影响所有页面路由的根路径
   trailingSlash: "always",
   integrations: [
     tailwind(
