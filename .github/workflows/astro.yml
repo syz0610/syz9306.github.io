@@ -1,8 +1,7 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Trigger the workflow every time you push to the `main` branch
-  # Using a different branch name? Replace `main` with your branch’s name
+  # 这里的push事件是指每次当你向dev分支推送代码时，触发这个工作流,同时也是基于dev分支的代码进行构建和部署
   push:
     branches: [ dev ]
   # Allows you to run this workflow manually from the Actions tab on GitHub.

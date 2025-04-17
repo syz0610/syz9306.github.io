@@ -1,9 +1,15 @@
 # About
-This is the demo site for [Fuwari](https://github.com/saicaca/fuwari).
+欢迎来到我的博客，我打算通过定期写博客来培养自己定时总结和学习的习惯。因此这边主要用来记录自己学习的知识和工作中遇到的问题。如果有空闲的话，也会记录一下自己的生活。
 
+本博客基于Astro构建，在Fuwari大佬的博客模板基础上做了修改而来，如果您觉得不错，还请不吝给原作者和我的仓库一颗⭐，非常感谢！
+
+- 我的仓库地址
+::github{repo="syz0610/syz0610.github.io"}
+
+- 原作者的仓库地址
 ::github{repo="saicaca/fuwari"}
 
-> ### Sources of images used in this site
-> - [Unsplash](https://unsplash.com/)
-> - [星と少女](https://www.pixiv.net/artworks/108916539) by [Stella](https://www.pixiv.net/users/93273965)
-> - [Rabbit - v1.4 Showcase](https://civitai.com/posts/586908) by [Rabbit_YourMajesty](https://civitai.com/user/Rabbit_YourMajesty)
+## 关于我
+
+- 嵌入式软件工程师一枚，目前主要业务方向是基于主流开源linux系统的物联网云平台开发以及数采驱动开发
+- 目前主要使用`Go`语言开发项目，辅助语言为`Python`、`C`、`C++`等以及`shell`脚本
