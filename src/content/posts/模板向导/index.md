@@ -281,9 +281,13 @@ Youtube视频需要获取embed开头的嵌入视频代码,点击视频下方分�
 
 B站目前的视频引用依赖于bv号，即使是以ss或ep开头的番剧类节目url,分享时也必须精确到具体每一分p的bv号
 
+:::warning[禁用自动播放]
+为了避免在不合适的场合产生噪音,应当禁止进入页面后自动播放,故此需要在每个url后面追加`&autoplay=0`参数
+:::
+
 具体语法为
 ```html
-<iframe width="100%" height="468" src="//player.bilibili.com/player.html?bvid=BV15K4y1x7da" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe width="100%" height="468" src="//player.bilibili.com/player.html?bvid=BV15K4y1x7da&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 ```
 
-<iframe width="100%" height="468" src="//player.bilibili.com/player.html?bvid=BV15K4y1x7da" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe width="100%" height="468" src="//player.bilibili.com/player.html?bvid=BV15K4y1x7da&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
