@@ -189,3 +189,71 @@ $$
 - [ ] 3
 - [ ] ffsad
 
+# Markdown扩展语法
+
+## GitHub仓库名片
+
+可以用语法`::github{repo="<owner>/<repo>"}`添加一个Github仓库链接到文章中，名片卡相关信息来自GitHub API
+
+::github{repo="carloscn/doclib"}
+
+## 提示卡
+
+目前支持这几种提示: `note` `tip` `important` `warning` `caution`
+
+:::note
+读者应当注意的基本信息
+:::
+
+:::tip
+用于启发读者的小技巧
+:::
+
+:::important
+关键信息或是关键步骤
+:::
+
+:::warning
+存在潜在风险时的提示信息
+:::
+
+:::caution
+一旦不遵守就会造成严重后果的内容
+:::
+
+### 上述提示的语法
+
+```markdown
+:::note
+Highlights information that users should take into account, even when skimming.
+:::
+
+:::tip
+Optional information to help a user be more successful.
+:::
+```
+
+### 自定义提示主题名
+
+上述提示可以使用自定义名称而不是`note` `tip` `important` `warning` `caution`
+
+:::note[我的note]
+这里是我的note信息
+:::
+
+```markdown
+:::note[我的note]
+这里是我的note信息
+:::
+```
+
+### 也支持Github提示块语法
+
+> [!TIP]
+> 点击查看 [Github提示块语法](https://github.com/orgs/community/discussions/16925)
+
+```
+> [!TIP]
+> [Github提示块语法](https://github.com/orgs/community/discussions/16925)
+```
+
