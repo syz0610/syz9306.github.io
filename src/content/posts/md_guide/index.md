@@ -120,7 +120,7 @@ for i in range(10):
 |------------|--------------|
 | `文本换行` | 第一行内容 <br/> 第二行内容 <br/> 第三行 |
 | `超链接`   | <a href="https://doodles.google/" target="_blank">试试手气</a> |
-| `插入图片` | <img src="/head.png" alt="图例" width="100" /> |
+| `插入图片` | <img src="/blog/md_guide/head.png" alt="图例" width="100" /> |
 | | |
 
 <figcaption style="text-align: center; margin-top: 0.5rem; font-style: italic;">
@@ -138,15 +138,15 @@ for i in range(10):
 
 <div class="img-grid-caption">
   <div class="img-item">
-    <img src="/head.png" alt="图1" />
+    <img src="/blog/md_guide/head.png" alt="图1" />
     <div class="img-caption">图片标题 1</div>
   </div>
   <div class="img-item">
-    <img src="/head.png" alt="图2" />
+    <img src="/blog/md_guide/head.png" alt="图2" />
     <div class="img-caption">图片标题 2</div>
   </div>
   <div class="img-item">
-    <img src="/head.png" alt="图3" />
+    <img src="/blog/md_guide/head.png" alt="图3" />
     <div class="img-caption">图片标题 3</div>
   </div>
   <!-- 更多图项 -->
