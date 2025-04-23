@@ -1,0 +1,17 @@
+---
+// ImageGallery.astro
+const { images = [] } = Astro.props;
+---
+
+<div class="img-masonry">
+  {images.map((img, i) => (
+    <a
+      href={img.src}
+      data-fancybox="gallery"
+      data-caption={img.caption ?? ""}
+      key={i}
+    >
+      <img src={img.src} alt={img.alt ?? `image-${i}`} />
+    </a>
+  ))}
+</div>

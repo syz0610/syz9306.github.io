@@ -115,9 +115,28 @@ Table: 一个比较简单的表格
 
 图像的引用方式:
 -  直接引用
-<p align="center">
-  <img src="/head.png" width="50%" alt="本地示例图片" />
-</p>
+
+
+<!-- <div class="img-column">
+  <img src="/head.png" alt="图1" />
+  <img src="/head.png" alt="图2" />
+</div> -->
+
+<div class="img-grid-caption">
+  <div class="img-item">
+    <img src="/head.png" alt="图1" />
+    <div class="img-caption">图片标题 1</div>
+  </div>
+  <div class="img-item">
+    <img src="/head.png" alt="图2" />
+    <div class="img-caption">图片标题 2</div>
+  </div>
+  <div class="img-item">
+    <img src="/head.png" alt="图3" />
+    <div class="img-caption">图片标题 3</div>
+  </div>
+  <!-- 更多图项 -->
+</div>
 
 
 - 带格式引用
@@ -126,18 +145,19 @@ Table: 一个比较简单的表格
 </div>
 
 </br>
-行内数学方程式写法如下所示: $\omega = d\phi / dt$. 
 
-单独一行数学公式写法如下，注意以双美元符号形式包围输入的公式:
+这是行内公式：$\omega = d\phi / dt$
 
-$$I = \int \rho R^{2} dV$$
+这是块级公式，自动居中，注意以双美元符号形式包围输入的公式:
+
+$$
+I = \int \rho R^{2} dV
+$$
 
 
 $$
 \begin{equation*}
-\pi
-=3.1415926535
- \;8979323846\;2643383279\;5028841971\;6939937510\ldots
+\pi = 3.14159\ldots
 \end{equation*}
 $$
 

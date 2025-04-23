@@ -43,7 +43,7 @@ lang: jp      # 仅当文章语言与 `config.ts` 中的网站语言不同时需
 
 | Command                           | Action                            |
 |:----------------------------------|:----------------------------------|
-| `pnpm install` 并 `pnpm add sharp` | 安装依赖                              |
+| `pnpm install` 并 `pnpm add sharp` `pnpm install remark-math rehype-katex` | 安装依赖                              |
 | `pnpm dev`                        | 在 `localhost:4321` 启动本地开发服务器      |
 | `pnpm build`                      | 构建网站至 `./dist/`                   |
 | `pnpm preview`                    | 本地预览已构建的网站                        |
