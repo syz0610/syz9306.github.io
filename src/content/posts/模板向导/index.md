@@ -1,10 +1,10 @@
 ---
-title: 模板向导
-published: 2025-04-01
-description: '关于当前博客模板的文章生成方式以及markdown特殊语法的提示,合并原有的几个向导'
+title: Markdown语法指南
+published: 2025-04-23
+description: '合并原博客的几个教程,作为基础的Markdown语法使用指南以供参考'
 image: ''
-tags: [Markdown, Blogging, Demo]
-category: 'Examples'
+tags: [Markdown, Guide,语法]
+category: 'Cookbook'
 draft: false 
 lang: ''
 ---
