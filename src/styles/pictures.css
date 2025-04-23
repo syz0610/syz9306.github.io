@@ -113,4 +113,37 @@
     display: block;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
-  
+
+/* Markdown Table */
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* ✅ 均匀分配列宽 */
+  border-bottom: 3px solid #888;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+.markdown th,
+.markdown td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  vertical-align: middle; /* ✅ 垂直居中 */
+  text-align: center; /* ✅ 内容居中显示 */
+  max-height: 100px;
+  overflow: hidden;
+}
+
+/* 图片居中 + 缩放适应 */
+.markdown td img {
+  display: inline-block; /* 强制使图片成为内联块元素 */
+  max-width: 80px;   /* 控制图片大小 */
+  max-height: 80px;
+  overflow: hidden;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+  vertical-align: middle; /* 确保图片与行内文本垂直居中 */
+}

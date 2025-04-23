@@ -1,0 +1,52 @@
+---
+const { columns = [], data = [] } = Astro.props;
+---
+
+<style>
+  .smart-table-wrapper {
+    overflow-x: auto;
+    text-align: center;
+    margin: 1rem 0;
+  }
+  table.smart-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .smart-table th,
+  .smart-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    vertical-align: top;
+  }
+  .smart-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+  .smart-table img {
+    max-width: 80px;
+    cursor: zoom-in;
+    transition: 0.2s ease-in-out;
+  }
+  .smart-table img:hover {
+    transform: scale(1.8);
+  }
+</style>
+
+<div class="smart-table-wrapper">
+  <table class="smart-table">
+    <thead>
+      <tr>
+        {columns.map(col => <th>{col}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {data.map(row => (
+        <tr>
+          {columns.map(col => (
+            <td set:html={row[col] ?? ''}></td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
