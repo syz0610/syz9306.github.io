@@ -257,3 +257,33 @@ Optional information to help a user be more successful.
 > [Github提示块语法](https://github.com/orgs/community/discussions/16925)
 ```
 
+# 如何内嵌视频到文章中
+
+只需从相关平台复制视频分享链接，然后将其粘贴到`src`标签中即可,这里以B站和Youtube为例
+
+```yaml
+
+<iframe width="100%" height="468" src="https://www.youtube.com/embed/5gIf0_xpFPI?si=N1WTorLKL0uwLsU_" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+```
+
+## 嵌入YouTube视频
+
+Youtube视频需要获取embed开头的嵌入视频代码,点击视频下方分享按钮的嵌入选项即可:
+
+具体语法为
+```html
+<iframe width="100%" height="550" src="https://www.youtube.com/embed/zUcP-gSAoBY?si=dea5G0HhQMBlNyOL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+```
+
+<iframe width="100%" height="450" src="https://www.youtube.com/embed/zUcP-gSAoBY?si=dea5G0HhQMBlNyOL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## 嵌入B站视频
+
+B站目前的视频引用依赖于bv号，即使是以ss或ep开头的番剧类节目url,分享时也必须精确到具体每一分p的bv号
+
+具体语法为
+```html
+<iframe width="100%" height="468" src="//player.bilibili.com/player.html?bvid=BV15K4y1x7da" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+```
+
+<iframe width="100%" height="468" src="//player.bilibili.com/player.html?bvid=BV15K4y1x7da" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
