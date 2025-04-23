@@ -111,7 +111,21 @@ for i in range(10):
 | `第3行`| xxxxx 
 | `第4行`| xxxxx|
 
-Table: 一个比较简单的表格
+<figcaption style="text-align: center; margin-top: 0.5rem; font-style: italic;">
+表3-1 一个比较简单的表格
+</figcaption>
+
+
+| 功能描述   | 示例内容演示 |
+|------------|--------------|
+| `文本换行` | 第一行内容 <br/> 第二行内容 <br/> 第三行 |
+| `超链接`   | <a href="https://doodles.google/" target="_blank">试试手气</a> |
+| `插入图片` | <img src="/head.png" alt="图例" width="100" /> |
+| | |
+
+<figcaption style="text-align: center; margin-top: 0.5rem; font-style: italic;">
+表3-2 带图片的表格
+</figcaption>
 
 图像的引用方式:
 -  直接引用
@@ -175,22 +189,3 @@ $$
 - [ ] 3
 - [ ] ffsad
 
-
-
-| 功能描述   | 示例内容演示 |
-|------------|--------------|
-| `文本换行` | 第一行内容 <br/> 第二行内容 <br/> 第三行 |
-| `超链接`   | <a href="https://doodles.google/" target="_blank">试试手气</a> |
-| `插入图片` | <img src="/head.png" alt="图例" width="100" /> |
-| | |
-
-
-
-这是一个任务列表：
-
-- [x] task1
-- [ ] task2
-  - [ ] 2-1
-    - [ ] 2-3
-- [ ] 3
-- [ ] ffsad

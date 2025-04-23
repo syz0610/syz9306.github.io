@@ -147,3 +147,12 @@
   transition: transform 0.3s ease;
   vertical-align: middle; /* 确保图片与行内文本垂直居中 */
 }
+
+/* 隐藏任务列表前的方块 */
+.markdown input[type="checkbox"] {
+  display: none; /* 隐藏复选框 */
+}
+
+.markdown li {
+  list-style-type: none; /* 去掉列表的默认样式 */
+}
