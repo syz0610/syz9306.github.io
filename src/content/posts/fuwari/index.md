@@ -2,7 +2,7 @@
 title: 本框架开发部署指南
 published: 2025-04-23
 description: '当前博客框架Fuwari的开发和部署指南'
-image: 'cover.jpeg'
+image: ''
 tags: [Cookbook,Astro,前端,Git]
 category: 'Cookbook'
 draft: false 
