@@ -3,7 +3,7 @@ title: Markdown语法指南
 published: 2025-04-23
 description: '合并原博客的几个教程,作为基础的Markdown语法使用指南以供参考'
 image: ''
-tags: [Markdown, Guide,语法]
+tags: [Cookbook,Markdown]
 category: 'Cookbook'
 draft: false 
 lang: ''

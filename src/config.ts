@@ -15,12 +15,13 @@ export const siteConfig: SiteConfig = {
 		fixed: false, // 是否禁止用户调整主题颜色
 	},
 	banner: {
-		enable: false,
-		src: "assets/images/demo-banner.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+		enable: true,
+		//src: "assets/images/demo-banner.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+		src: "assets/images/banner.jpg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
 		credit: {
 			enable: true, // Display the credit text of the banner image
-			text: "12345", // Credit text to be displayed
+			text: "封面图版权为本人所有", // Credit text to be displayed
 			url: "", // (Optional) URL link to the original artwork or artist's page
 		},
 	},
@@ -54,7 +55,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/head.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "土豆",
-	bio: "人间繁华多笑语，惟我空余两鬓风",
+	bio: "拥抱当下",
 	links: [
 		{
 			name: "Twitter",
