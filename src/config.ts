@@ -8,7 +8,7 @@ import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "土豆的博客",
-	subtitle: "syz blog",
+	subtitle: "White Cut Chicken",
 	lang: "zh_CN", // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko', 'es', 'th'
 	themeColor: {
 		hue: 260, // 设置默认主题色,影响初次访问以及主页调色盘重置按钮
