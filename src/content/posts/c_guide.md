@@ -1,5 +1,5 @@
 ---
-title: C语言教程-常量和变量
+title: C语言教程-常量、变量、关键字和预处理指令
 published: 2025-04-28
 description: '做项目时候作为字典的笔记'
 image: ''
@@ -10,6 +10,200 @@ lang: ''
 ---
 
 # 基础语法
+
+## 预处理指令
+
+- `#include`通常用来包括头文件：
+  - `<...>`表示优先搜索系统目录
+  - `"..."`表示优先搜索当前目录(可以带相对路径)，再搜索系统目录
+
+- `#define`关键字有三个作用：
+    1. 宏定义常数：`#define BUFFER_SIZE 1024`
+    2. 宏定义函数：`#define MAX(a, b) ((a) > (b) ? (a) : (b))`
+    3. 条件编译
+   ```c
+   #define DEBUG
+    #ifdef DEBUG
+        printf("Debug mode\n");
+    #endif
+   ```
+   4. 宏展开防止重复包含
+    ```c
+    #ifndef MY_HEADER_H
+    #define MY_HEADER_H
+    // 内容
+    #endif
+    ```
+    5. 安全宏函数:
+
+        在C中有：
+
+        ```c
+        #define SAFE_FREE(p) \
+        do {             \
+            if (p) {     \
+                free(p); \
+                p = NULL;\
+            }            \
+        } while (0)
+
+        char *p = malloc(100);
+
+        SAFE_FREE(p);  // p 被释放且设为 NULL
+        if (p) {
+            // 这里不会进入，因为 p 是 NULL，避免了悬空指针访问
+        }
+        ```
+
+        又或者在C++中可以有：
+
+        ```c++
+        #define SAFE_DELETE(ptr)     \
+            do {                     \
+                if (ptr) {           \
+                    delete ptr;      \
+                    ptr = nullptr;   \
+                }                    \
+            } while (0)
+
+        #define SAFE_DELETE_ARRAY(ptr) \
+            do {                       \
+                if (ptr) {             \
+                    delete[] ptr;      \
+                    ptr = nullptr;     \
+                }                      \
+            } while (0)
+        ```
+
+- `#pragma`并不是C标准语法的一部分,属于**编译器指令**,不同编译器有不同的指令
+  - **消除编译警告(Visual Studio特有)**：`#pragma warning(disable : 4996)`
+  - **内存对齐设置**
+    ```c
+    #pragma pack(1)   // 1字节对齐
+    struct S {
+        char a;
+        int b;
+    };
+    #pragma pack()    // 恢复默认
+    ```
+  - **防止重复包含**: `#pragma once` 这个和上面的宏定义是等价的  
+
+## 关键字
+
+C语言关键字如下：
+| 关键字分类 | 例子 |
+|:---|:---|
+| 数据类型声明 | `int`, `float`, `char`, `void`, `struct`, `union`, `enum` |
+| 控制语句 | `if`, `else`, `switch`, `case`, `default`, `for`, `while`, `do`, `break`, `continue`, `goto`, `return` |
+| 存储类型 | `auto`, `static`, `extern`, `register`, `const`, `volatile` |
+| 其他 | `sizeof`, `typedef` |
+
+:::important
+- `auto`关键字在C语言中不用显式声明
+- `static`比较重要，具体用法如下：
+    1. **私有函数或变量**：在`.c`文件中声明和定义static变量或函数，类似于Java或Go中的私有函数或变量的用法，避免对外暴露
+    ```c
+    // module.c
+    static void helper() { ... }      // 内部使用
+    int public_api() { helper(); }    // 提供公开接口
+
+    // module.h
+    int public_api();   // 只暴露接口
+    ```
+    2. **防止符号污染**：由于是各`.c`文件私有的变量或函数，因此不存在调用不同库时命名撞车的问题，也因此static变量不要在`.h`文件中定义
+    ```c
+    // moduleA.c
+    int count = 5;
+
+    // moduleB.c
+    int count = 6;          //Error 重复定义
+    static int count = 6；  //OK
+    ```
+    3. **局部静态变量**：在函数体中定义，可以使该局部变量保留上次的值，不因为函数初始化或结束调用而被初始化或销毁，通常用于设计`计数器`或`状态机`。局部静态变量在全局数据区分配内存，且如果没有显式初始化的话会被初始化为`0`.
+    ```c
+    void counter_func() {
+        static int count = 0; // 只初始化一次
+        count++;              // 每次调用加一
+        printf("This function has been called %d times.\n", count);
+    }
+
+    int main() {
+        counter_func();  // 输出 1
+        counter_func();  // 输出 2
+        counter_func();  // 输出 3
+        return 0;
+    }
+    ```
+    4. 搭配`inline`关键字实现静态内联函数，用宏定义作全局替换，一般拿来写工具函数：
+    ```c
+    // math_utils.h
+    #ifndef MATH_UTILS_H
+    #define MATH_UTILS_H
+
+    static inline int max(int a, int b) {
+        return a > b ? a : b;
+    }
+
+    #endif
+    ```
+- `extern关键字也很特殊`,主要作用如下:
+    1. C语言中一般不用`static`关键字修饰的变量都是`extern`的
+    2. 用于在.h文件中声明并暴露出去，保证变量唯一，控制全局重名，防止修改
+    ```c
+    global.h：
+    extern const int MAX_SIZE;
+    global.c：
+    const int MAX_SIZE = 1024;
+    main.c：
+    #include "global.h"
+    printf("%d", MAX_SIZE); // OK
+    ```
+    这里其实是因为const修饰的变量或函数默认为`局部只读变量`，需要再用extern暴露出去
+    3. 在C++中使用`extern "C" void c_function();`来调用C代码的函数
+
+- `register`关键字现在一般不使用了，它的作用是手动把变量放寄存器里提高访问速度，
+适合修饰临时的循环变量，在单片机裸机编程中可能会遇到
+
+- `volatile`关键字表示告诉编译器该变量的值可能随时发生改变，不要优化其读写操作(**阻止编译器优化**)：
+  
+  - 一般用于**中断**或者**多线程共享变量**的处理，
+    - 也可能**随外部变化的硬件寄存器的值**（如 UART 收发缓冲区）
+    - 示例如下，若不加volatile，编译器可能认为 UART0_DR 永远不会变，从而优化掉访问操作，导致程序无法与外设通信。
+    ```c
+    #define UART0_DR (*(volatile unsigned int *)0x101f1000)
+    void uart_send_char(char c) {
+        UART0_DR = c;  // 写入外设寄存器
+    }
+    ```
+    - 即使使用 volatile，某些架构如ARM仍然可能指令重排序(Out-of-Order Execution)，会破坏时序依赖。
+    因此需要使用`内存屏障（memory barrier`或`编译器屏障(compiler barrier)`
+    
+    C语言内联汇编屏障示例(GCC)：`#define COMPILER_BARRIER() __asm__ __volatile__("" ::: "memory")`
+    
+    ARM架构下完整屏障:`_asm__ __volatile__("dmb ish" ::: "memory");// 内存屏障：确保前面的操作在后面的操作前完成`
+    
+    因此它还有个作用是**强制每次读写都访问真实内存**，也因此它不是原子性的
+
+    | 场景 | 示例 |
+    |------|------|
+    | 中断标志 | `volatile int irq_flag;` |
+    | 多核/多线程共享变量 | `volatile int status;` |
+    | 外设状态寄存器 | `#define UART_TX (*(volatile uint8_t *)0x40011000)` |
+    | 系统时钟等周期更新变量 | `volatile unsigned long system_tick;` |
+
+  ```c
+  volatile int flag;
+
+  void isr_handler() {
+      flag = 1;  // 中断中修改 flag
+  }
+
+  void main_loop() {
+      while (flag == 0);  // 不会被优化成死循环
+      // 执行后续逻辑
+  }
+  ```
+:::
 
 ## 常量
 
