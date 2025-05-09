@@ -82,6 +82,7 @@ C语言关键字如下：
     printf("%d", MAX_SIZE); // OK
     ```
     这里其实是因为const修饰的变量或函数默认为`局部只读变量`，需要再用extern暴露出去
+
     3. 在C++中使用`extern "C" void c_function();`来调用C代码的函数
 
 - `register`关键字现在一般不使用了，它的作用是手动把变量放寄存器里提高访问速度，
@@ -101,9 +102,16 @@ C语言关键字如下：
     - 即使使用 volatile，某些架构如ARM仍然可能指令重排序(Out-of-Order Execution)，会破坏时序依赖。
     因此需要使用`内存屏障（memory barrier`或`编译器屏障(compiler barrier)`
     
-    C语言内联汇编屏障示例(GCC)：`#define COMPILER_BARRIER() __asm__ __volatile__("" ::: "memory")`
+    - C语言内联汇编屏障示例(GCC)：
+    ```c
+    #define COMPILER_BARRIER() __asm__ __volatile__("" ::: "memory")
+    ```
     
-    ARM架构下完整屏障:`_asm__ __volatile__("dmb ish" ::: "memory");// 内存屏障：确保前面的操作在后面的操作前完成`
+    - ARM架构下完整屏障:
+    ```c
+    // 内存屏障：确保前面的操作在后面的操作前完成
+    _asm__ __volatile__("dmb ish" ::: "memory");
+    ```
     
     因此它还有个作用是**强制每次读写都访问真实内存**，也因此它不是原子性的
 
