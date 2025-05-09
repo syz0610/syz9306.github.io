@@ -499,4 +499,161 @@ C语言常用逻辑表达式运算符如下:
 |`&&`|逻辑与|同时为真则为真|**短路原则**:左表达式为假则直接判定为假
 |`\|\|`|逻辑或|有一个条件为真则为真|
 
-### 逻辑表达式的化简
+### 逻辑表达式概论(可选)
+
+这一部分涉及到数字电路的基础知识,不属于C语言的必须知识
+
+#### 预备知识1 - 五种复合运算
+
+|运算|写法
+|:---|:---
+|`或非运算`|$F=\overline{A+B}$
+|`与非运算`|$F=\overline{AB}$
+|`与或非运算`|$F=\overline{AB+CD}$
+|`异或运算`|$F=A\oplus B=\overline{A}B+A\overline{B}$
+|`同或运算`|$F=A\odot B=\overline{A}\overline{B}+AB$
+
+:::important[异或和同或运算]
+异或运算有以下几个非常重要的性质:
+1. 两个变量相反时为`1`,相同时为`0`;同或反之
+2. `异或`和`同或`互为**反函数**，即：$A\oplus B=\overline{A\odot B}$ 或者 $A\odot B=\overline{A\oplus B}$，因此有时候同或也称`异或非`
+3. 偶数个1`异或`为`0`,奇数个1`异或`为`1`;偶数个0`同或`为`1`,奇数个0`同或`为`0`
+4. 任何变量异或自己都是`置零`操作
+:::
+
+#### 预备知识2 - 化简原则
+
+1. 任何一个逻辑表达式都可以展开为`与或`表达式
+2. 任何一个`与或`表达式出发都可以得到其他四种表达式
+3. 化简的目标是`最简与或表达式`,需要满足两个要求：
+   1. 表达式中的`乘积项`应该是最少的,是为了我们的与门和或门最少.因为每一个乘积项都需要一个与门来实现;同时也对应了或门输入端的个数变少，有2个与项或门就有2个输入端，有3个与项或门就有3个输入端
+   2. 每一个`乘积项`中的`变量`个数应该是最少的,它是为了每一个与门的输入端最少
+
+#### 预备知识3 - 逻辑运算基本公式
+
+逻辑运算的基本公式如下：
+
+|运算律|基本公式|基本公式
+|:---|:---|:---
+|`自等律`|$A·1=A$| $A+0=A$|
+|`吸收律`|$A·0=0$| $A+1=1$|
+|`重叠律`|$A·A=A$| $A+A=A$|
+|`互补律`|$A·\overline{A}=0$|$A+\overline{A}=1$|
+|`还原律`|$\overline{\overline{A}}=A$ |
+|`交换律`|$A+B=B+A$|$A·B=B·A$|
+|`结合律`|$A+B+C=A+(B+C)=(A+B)+C$|$A·B·C=A·(B·C)=(A·B)·C$|
+|`分配律`|$A·(B+C)=AB+AC$|$A+BC=(A+B)·(A+C)$|
+|`反演律(德·摩根定律)`|$\overline{A+B}=\overline{A}·\overline{B}$|$\overline{AB}=\overline{A}+\overline{B}$|
+
+复合运算的基本公式如下:
+|运算律|异或|同或
+|:---|:---|:---
+|`自等律`|$A\oplus 0=A$|$A\odot 1=A$
+|`求补律`|$A\oplus 1=\overline{A}$|$A\odot 0=\overline{A}$
+|`交换律`|$A\oplus B=B\oplus A$|$A\odot B=B\odot A$
+|`因果互换律`|若$A\oplus B=C$则$A\oplus C=B$|若$A\odot B=C$则$A\odot C=B$
+|`结合律`|$A\oplus B\oplus C=A\oplus (B\oplus C)=(A\oplus B)\oplus C$|$A\odot B\odot C=A\odot (B\odot C)=(A\odot B)\odot C$
+|`分配律`|$A(B\oplus C)=AB\oplus AC$|$A+(B\odot C)=(A+B)\odot (A+C)$
+|`反演律`|$\overline{A\oplus B}=A\odot B=\overline{A}\odot \overline{B}=A\oplus \overline{B}$|$\overline{A\odot B}=A\oplus B=\overline{A}\oplus \overline{B}=A\odot \overline{B}$
+
+:::tip[多变量异或同或规律]  
+1. 偶数个变量的异或和同或互补: $A_{1}\oplus A_{2}\oplus \cdots \oplus A_{n}=\overline{A_{1}\odot A_{2}\odot \cdots \odot A_{n}}\;$ n为偶数
+2. 奇数个变量的异或和同或相等: $A_{1}\oplus A_{2}\oplus \cdots \oplus A_{n}=A_{1}\odot A_{2}\odot \cdots \odot A_{n}\;$ n为奇数
+3. 多个`0`、`1`异或时，看`1`的个数，偶数个`1`则为`0`，奇数个`1`则为`1`
+4. 多个`0`、`1`同或时，看`0`的个数，偶数个`0`则为`1`，奇数个`0`则为`0`
+:::
+
+:::important[复合运算常用的二级结论]
+|结论|公式
+|:---|:---
+|`合并相邻项`|$AB+A\overline{B}=A$
+|`消项公式`|$A+AB=A$|
+|`消去补因子`|$A+\overline{A}B=A+B$|
+|`多余项(生成项)公式`|$AB+\overline{A}C+BC=AB+\overline{A}C$|
+:::
+
+#### 预备知识4 - 逻辑运算基本规则
+
+1. 代入规则
+   逻辑表达式的某个因子可以替换为一个表达式
+   - eg. 若$\overline{A+B}=\overline{A}·\overline{B}$且$F=B+C$, 则\overline{A+B+C}=\overline{A}·\overline{B+C}=\overline{A}·\overline{B}·\overline{C}$
+2. 反演规则
+   对原表达式求反函数称为反演，规则是将原函数中所有的变量原、反互换，所有的算符`+`、`·`互换，所有的常量`0`、`1`互换。
+   - eg. 若$F=A\overline{BC}+\overline{B+C}·D+\overline{E}$, 则$\overline{F}=(\overline{A}+\overline{\overline{B}+\overline{C}})(\overline{\overline{B}·\overline{C}}+\overline{D})·E$
+   - 注意反演前后对应变量的运算顺序不可以改变，因此要注意加括号。
+   - 此外，不是单个变量上的非号应保留。
+   - **摩根定律是反演规则的特例。**
+3. 对偶规则
+    如果仅仅是将原函数中的所有算符`+`、`·`互换，所有常量`0`、`1`互换，且保证对应变量的运算顺序也不变(同反演律)，则称为对偶函数$F^{\prime}$
+    - eg. 若$F=A(B+\overline{C})·0$，则$F^{\prime}=A+B\overline{C}+1$
+    - 对于某一等式，若能证明其对偶函数成立，则原函数也成立
+    - 求对偶函数时，变量的原、反不互换，否则就变成求反函数了
+    - 将$F^{\prime}$中的变量原、反互换就得到了$\overline{F}$,反之亦然
+    
+:::important
+**在对原函数进行变化时，千万不要同时化简表达式**
+:::
+
+#### 预备知识5 - 逻辑函数的常见表达式
+
+一个逻辑函数的真值表是唯一的，但其表达式并不唯一，可以通过上文的各种运算律进行变换，变成各种形式。
+
+eg. 对于表达式$F=AB+\overline{A}C$,有以下5种常见表达式：
+
+|逻辑关系|写法1|写法2
+|:---|:---|:---
+|`与或式`|$F=AB+\overline{A}C$|$F=\overline{\overline{AB+\overline{A}C}}$
+|`与非-与非式`|$\overline{\overline{AB}{\cdot}\overline{\overline{A}C}}$|$\overline{(\overline{A}+\overline{B}){\cdot}(A+\overline{C})}$
+|`与或非`|$\overline{A\overline{B}+\overline{A}\;\overline{C}}\;$(**表达式中的$+\overline{B}\;\overline{C}$多余**)
+|`或-与式`|$(\overline{A}+B){\cdot}(A+C)$|$\overline{\overline{(\overline{A}+B){\cdot}(A+C)}}$
+|`或非-或非式`|$\overline{\overline{\overline{A}+B}+\overline{A+C}}$
+
+### 逻辑表达式的化简(可选)
+
+逻辑表达式有3种化简方法：
+
+1. 代数化简法：反复使用基本公式和运算律消去多余项和多余因子,比如`并项法`、`消项法`、`消元法`、`配项法`
+**当表达式过于复杂时,运算律的运用会比较复杂,因此实际并不常用**
+
+1. 卡诺图法
+卡诺图是一种比较通用的方法，它有两个预备知识：
+- 最小项的定义：一个函数的某个乘积项包含了函数的全部变量，其中每个变量都以原变量或反变量的形式出现，
+  且**仅出现一次**，则这个乘积项称为该函数的一个标准积项，通常称为`最小项`。
+  简单来说最小项就是变量只有与非的表达式,比如$\overline{AB}$或者$\overline{A}BC$,以三变量的表达式为例,
+  **一共有8种组合,但只允许有1种的表达式为1,其他的为0**
+- 逻辑相邻最小项的定义:如果两个最小项之间，**只有一个变量不同，其余都相同**，这个就叫做逻辑相邻最小项,
+  **也就是真值表必须符合格雷码的规则：相邻两项各位只能有1位不同**
+
+<div align="center">  
+<div class="img-grid-caption">
+  <div class="img-item">
+    <img src="/blog/2-kanuo.png" alt="图1" />
+    <div class="img-caption">2变量卡诺图</div>
+  </div>
+  <div class="img-item">
+    <img src="/blog/3-kanuo.png" alt="图2" />
+    <div class="img-caption">3变量卡诺图</div>
+  </div>
+  <div class="img-item">
+    <img src="/blog/4-kanuo.png" alt="图3" />
+    <div class="img-caption">4变量卡诺图</div>
+  </div>
+  <div class="img-item">
+    <img src="/blog/5-kanuo.png" alt="图4" />
+    <div class="img-caption">5变量卡诺图</div>
+  </div>
+</div>
+</div>
+
+:::tips[关于五变量卡诺图]
+对于5变量的卡诺图，我们也应该提供给每一个最小项都有5个位置相邻的最小项。
+但是在二维表中，只有上下左右，因此没有办法在一个表中提供5个位置相邻的最小项。
+那么一张不行，我们就把它定义成2张卡诺图:
+假设，5个变量分别为：ABCDE，我们把A变量单独拿出来，
+将A=0的情况，用一张表来表示；
+将A=1的情况，再用一张表表示。
+每个表都是4变量的卡诺图，结合成最小项时，
+A变量在最高位，接下来是左侧的变量BC，上侧的变量DE在低位,参考图4。
+:::
+
+3. 系统化简法(Q-M法)
