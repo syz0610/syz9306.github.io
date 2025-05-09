@@ -576,7 +576,7 @@ C语言常用逻辑表达式运算符如下:
 
 1. 代入规则
    逻辑表达式的某个因子可以替换为一个表达式
-   - eg. 若$\overline{A+B}=\overline{A}·\overline{B}$且$F=B+C$, 则\overline{A+B+C}=\overline{A}·\overline{B+C}=\overline{A}·\overline{B}·\overline{C}$
+   - eg. 若$\overline{A+B}=\overline{A}·\overline{B}$且$F=B+C$, 则$\overline{A+B+C}=\overline{A}·\overline{B+C}=\overline{A}·\overline{B}·\overline{C}$
 2. 反演规则
    对原表达式求反函数称为反演，规则是将原函数中所有的变量原、反互换，所有的算符`+`、`·`互换，所有的常量`0`、`1`互换。
    - eg. 若$F=A\overline{BC}+\overline{B+C}·D+\overline{E}$, 则$\overline{F}=(\overline{A}+\overline{\overline{B}+\overline{C}})(\overline{\overline{B}·\overline{C}}+\overline{D})·E$
